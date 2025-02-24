@@ -21,7 +21,7 @@ pipeline {
 
            stage('Checkout') {
                steps {
-                   git branch: 'develop', url: 'https://github.com/marielapichardo/AppMovilD.git'
+                   git branch: 'develop', url: 'https://github.com/marielapichardo/api-paralelapc2.git'
                }
            }
 
