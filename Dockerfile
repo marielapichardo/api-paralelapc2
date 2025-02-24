@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install -y \
 COPY --from=builder /usr/src/app/target/release/ApiParalela /usr/local/bin/ApiParalela
 
 # Copiar el archivo fcm_account.json al contenedor
-COPY fcm_account.json /usr/local/bin/fcm_account.json
+#COPY fcm_account.json /usr/local/bin/fcm_account.json
 
 # 9. Exponer el puerto de la aplicació
 EXPOSE 3030
