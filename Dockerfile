@@ -33,7 +33,7 @@ COPY --from=builder /usr/src/app/target/release/ApiParalela /usr/local/bin/ApiPa
 # Copiar el archivo fcm_account.json al contenedor
 COPY fcm_account.json /usr/local/bin/fcm_account.json
 
-# 9. Exponer el puerto de la aplicación
+# 9. Exponer el puerto de la aplicació
 EXPOSE 3030
 #10  Ejecutar el binario
 CMD ["ApiParalela"]
