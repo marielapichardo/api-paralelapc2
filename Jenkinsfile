@@ -35,7 +35,26 @@ pipeline {
                    }
                }
            }
-       }
+
+           stage('Push to Nexus') {
+            steps {
+                script {
+                    // 1. Etiquetar la imagen para Nexus
+                    bat "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_REGISTRY}/${NEXUS_REPO}/${DOCKER_IMAGE}:${DOCKER_TAG}"
+                    
+                    // 2. Iniciar sesión en Nexus usando credenciales configuradas en Jenkins
+                    withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
+                        // En Windows, las variables en comandos bat se referencian con %VARIABLE%
+                        bat "docker login ${DOCKER_REGISTRY} -u %NEXUS_USER% -p %NEXUS_PASS%"
+                    }
+                    
+                    // 3. Subir la imagen a Nexus
+                    bat "docker push ${DOCKER_REGISTRY}/${NEXUS_REPO}/${DOCKER_IMAGE}:${DOCKER_TAG}"
+                }
+            }
+        }
+    }
+       
 
            
        post {
