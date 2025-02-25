@@ -3,8 +3,8 @@ pipeline {
 
     environment {
 
-        // Variables de entorno para Nexus y AWS Fargate
-           DOCKER_REGISTRY = "10.0.0.8:8082"  // Por ejemplo, si usas Nexus, la IP/d
+        // Variables de entorno para Nexus 
+           DOCKER_REGISTRY = "10.0.0.8:8082"  
            NEXUS_REPO      = "repositorio-nexus"
            DOCKER_IMAGE    = "api-paralela"
            DOCKER_TAG      = "latest"
@@ -13,11 +13,11 @@ pipeline {
             NEXUS_PASSPRASE = "Mari0203"
 
            // Parámetros para AWS
-           AWS_REGION      = "us-east-1"  // Cambia según tu región
-           ECS_CLUSTER     = "paralelacluster"  // Nombre de tu clúster en ECS
-           ECS_SERVICE     = "paralela-service"     // Nombre del servicio en ECS
-           TASK_FAMILY     = "paralelatask"  // Familia de la definición de tarea en ECS
-           EXECUTION_ROLE  = "arn:aws:iam::831926602540:role/ecsTaskExecutionRole" // Rol de ejecució
+           AWS_REGION      = "us-east-1"  
+           ECS_CLUSTER     = "paralelacluster"  
+           ECS_SERVICE     = "paralela-service"     
+           TASK_FAMILY     = "paralelatask"  
+           EXECUTION_ROLE  = "arn:aws:iam::831926602540:role/ecsTaskExecutionRole" /
     }
 
        stages {
@@ -54,8 +54,7 @@ pipeline {
 
                    stage('Deploy servidor') {
                steps {
-                   // Asegúrate de tener AWS CLI instalado en el agente de Jenkins--
-                   // Configura tus credenciales de AWS en Jenkins (por ejemplo, con el ID 'aws-credentials')
+                   
                    withCredentials([[
                        $class: 'AmazonWebServicesCredentialsBinding',
                        credentialsId: '831926602540'
