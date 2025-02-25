@@ -8,7 +8,7 @@ pipeline {
            NEXUS_REPO      = "repositorio-nexus"
            DOCKER_IMAGE    = "api-paralela"
            DOCKER_TAG      = "latest"
-        // Credenciales de Nexus (si se requieren)
+        
             NEXUS_USER     = "admin"
             NEXUS_PASSPRASE = "Mari0203"
 
