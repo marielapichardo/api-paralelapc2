@@ -75,7 +75,7 @@ pipeline {
                                  "portMappings": [
                                    {
                                      "containerPort": 3030,
-                                     "hostPort": 30,
+                                     "hostPort": 3030,
                                      "protocol": "tcp"
                                    }
                                  ]
