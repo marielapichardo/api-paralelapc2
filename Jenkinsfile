@@ -53,6 +53,56 @@ pipeline {
             }
 
         }
+
+        stage('Deploy servidor') {
+               steps {
+                   // Asegúrate de tener AWS CLI instalado en el agente de Jenkins
+                   // Configura tus credenciales de AWS en Jenkins (por ejemplo, con el ID 'aws-credentials')
+                   withCredentials([[
+                       $class: 'AmazonWebServicesCredentialsBinding',
+                       credentialsId: 'aws-credentials'
+                   ]]) {
+                       script {
+                           // Generar el JSON de la nueva definición de tarea
+                           def taskDefJson = """
+                           {
+                             "family": "${TASK_FAMILY}",
+                             "networkMode": "awsvpc",
+                             "executionRoleArn": "${EXECUTION_ROLE}",
+                             "containerDefinitions": [
+                               {
+                                 "name": "${DOCKER_IMAGE}",
+                                 "image": "${DOCKER_REGISTRY}/${NEXUS_REPO}/${DOCKER_IMAGE}:${DOCKER_TAG}",
+                                 "essential": true,
+                                 "portMappings": [
+                                   {
+                                     "containerPort": 3030,
+                                     "hostPort": 30,
+                                     "protocol": "tcp"
+                                   }
+                                 ]
+                               }
+                             ],
+                             "requiresCompatibilities": [
+                                 "FARGATE"
+                             ],
+                             "cpu": "256",
+                             "memory": "512"
+                           }
+                           """
+                           // Escribir el archivo de definición de tarea
+                           writeFile file: 'taskdef.json', text: taskDefJson
+
+                           // Registrar la nueva revisión de la definición de tarea
+                           bat "aws ecs register-task-definition --region ${AWS_REGION} --cli-input-json file://taskdef.json"
+
+                           // Actualizar el servicio para forzar nueva implementación
+                           bat "aws ecs update-service --region ${AWS_REGION} --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --force-new-deployment"
+                       }
+                   }
+               }
+           }
+       
        
 
            
