@@ -60,7 +60,7 @@ pipeline {
                    // Configura tus credenciales de AWS en Jenkins (por ejemplo, con el ID 'aws-credentials')
                    withCredentials([[
                        $class: 'AmazonWebServicesCredentialsBinding',
-                       credentialsId: 'aws-credentials'
+                       credentialsId: '831926602540'
                    ]]) {
                        script {
                            // Generar el JSON de la nueva definición de tarea
