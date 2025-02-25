@@ -17,7 +17,7 @@ pipeline {
            ECS_CLUSTER     = "paralelacluster"  // Nombre de tu clúster en ECS
            ECS_SERVICE     = "paralela-service"     // Nombre del servicio en ECS
            TASK_FAMILY     = "paralelatask"  // Familia de la definición de tarea en ECS
-           EXECUTION_ROLE  = "arn:aws:iam::831926602540:role/ecsTaskExecutionRole" // Rol de ejecución para
+           EXECUTION_ROLE  = "arn:aws:iam::831926602540:role/ecsTaskExecutionRole" // Rol de ejecució
     }
 
        stages {
