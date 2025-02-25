@@ -54,7 +54,7 @@ pipeline {
 
                    stage('Deploy servidor') {
                steps {
-                   // Asegúrate de tener AWS CLI instalado en el agente de Jenkins
+                   // Asegúrate de tener AWS CLI instalado en el agente de Jenkins--
                    // Configura tus credenciales de AWS en Jenkins (por ejemplo, con el ID 'aws-credentials')
                    withCredentials([[
                        $class: 'AmazonWebServicesCredentialsBinding',
