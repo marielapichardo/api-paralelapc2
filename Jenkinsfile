@@ -4,7 +4,7 @@ pipeline {
     environment {
 
         // Variables de entorno para Nexus y AWS Fargate
-           DOCKER_REGISTRY = "10.0.0.8:8082"  // Por ejemplo, si usas Nexus, la IP/dominio de Nexus
+           DOCKER_REGISTRY = "10.0.0.8:8082"  // Por ejemplo, si usas Nexus, la IP/dominio de N
            NEXUS_REPO      = "repositorio-nexus"
            DOCKER_IMAGE    = "api-paralela"
            DOCKER_TAG      = "latest"
