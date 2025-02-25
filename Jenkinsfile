@@ -31,7 +31,7 @@ pipeline {
            stage('Build Docker Image') {
                steps {
                    script {
-                       // Construir la imagen Docker
+                       // Construir la
                        bat "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
                        // Etiquetar la imagen para el registro
                        bat "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_REGISTRY}/${NEXUS_REPO}/${DOCKER_IMAGE}:${DOCKER_TAG}"
