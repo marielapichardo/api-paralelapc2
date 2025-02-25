@@ -8,6 +8,9 @@ pipeline {
            NEXUS_REPO      = "repositorio-nexus"
            DOCKER_IMAGE    = "api-paralela"
            DOCKER_TAG      = "latest"
+        // Credenciales de Nexus (si se requieren)
+            NEXUS_USER     = "admin"
+            NEXUS_PASSPRASE = "Mari0203"
 
            // Parámetros para AWS
            AWS_REGION      = "us-east-1"  // Cambia según tu región
@@ -31,12 +34,18 @@ pipeline {
                        // Construir la imagen Docker
                        bat "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
                        // Etiquetar la imagen para el registro
-                       //bat "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_REGISTRY}/${NEXUS_REPO}/${DOCKER_IMAGE}:${DOCKER_TAG}"
+                       bat "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_REGISTRY}/${NEXUS_REPO}/${DOCKER_IMAGE}:${DOCKER_TAG}"
                    }
                }
            }
 
-           stage('Push to Nexus') {
+           stage('Login en Nexus') {
+                steps {
+                    bat "docker login ${DOCKER_REGISTRY} -u ${NEXUS_USER} -p ${NEXUS_PASSPRASE}"
+                }
+            }
+
+           /*stage('Push to Nexus') {
             steps {
                 script {
                     // 1. Etiquetar la imagen para Nexus
@@ -52,7 +61,7 @@ pipeline {
                     bat "docker push ${DOCKER_REGISTRY}/${NEXUS_REPO}/${DOCKER_IMAGE}:${DOCKER_TAG}"
                 }
             }
-        }
+        }*/
     }
        
 
