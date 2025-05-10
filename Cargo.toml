@@ -1,0 +1,18 @@
+[package]
+name = "ApiParalela"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "ApiParalela"
+path = "src/main.rs"
+
+[dependencies]
+actix-web = "4"
+serde = { version = "1.0", features = ["derive"] } # Serialización de datos
+reqwest = { version = "0.11", features = ["json"] } # Para realizar solicitudes HTTP
+tokio = { version = "1", features = ["full"] }   # Soporte para tareas asíncronas
+uuid = { version = "1", features = ["v4"] } # Generación de IDs únicos
+serde_json = "1.0"
+actix-rt = "2"           # Runtime de Actix
+jsonwebtoken = "8"            # Para generar tokens JWT
